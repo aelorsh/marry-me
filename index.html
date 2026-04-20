@@ -24,7 +24,7 @@
       text-align: center;
       z-index: 10;
       position: relative;
-      width: 100%;
+      width: 90%;
       max-width: 800px;
     }
 
@@ -45,7 +45,8 @@
     .buttons {
       margin-top: 40px;
       position: relative;
-      min-height: 120px;   /* espaço reservado para o botão fugir */
+      min-height: 220px;
+      width: 100%;
     }
 
     button {
@@ -63,6 +64,8 @@
       color: white;
       position: relative;
       z-index: 2;
+      margin: 0 auto;
+      display: block;
     }
 
     #noBtn {
@@ -85,7 +88,7 @@
     <img id="gif" class="gif" src="https://media.tenor.com/EBV7OT7ACfwAAAAj/u-u-qua-qua-u-quaa.gif" alt="fofinho">
     
     <div class="buttons">
-      <button id="yesBtn">SIM</button>
+      <button id="yesBtn">SIM 💖</button>
       <button id="noBtn">NÃO</button>
     </div>
   </div>
@@ -117,15 +120,17 @@
     const question = document.getElementById('question');
 
     function moveNoButton() {
-      const container = document.querySelector('.buttons');
-      const containerRect = container.getBoundingClientRect();
+      const btnWidth = noBtn.offsetWidth || 140;
+      const btnHeight = noBtn.offsetHeight || 60;
 
-      // Gera posição aleatória dentro da área segura
-      const maxX = containerRect.width - 180;
-      const maxY = containerRect.height - 80;
+      // Margens de segurança para não sair da tela
+      const minX = 30;
+      const maxX = window.innerWidth - btnWidth - 30;
+      const minY = 180;   // evita ficar muito em cima (debaixo do título e gif)
+      const maxY = window.innerHeight - btnHeight - 100;
 
-      const randomX = Math.random() * maxX;
-      const randomY = Math.random() * maxY;
+      const randomX = Math.max(minX, Math.random() * (maxX - minX));
+      const randomY = Math.max(minY, Math.random() * (maxY - minY));
 
       noBtn.style.left = randomX + 'px';
       noBtn.style.top = randomY + 'px';
@@ -137,19 +142,24 @@
       moveNoButton();
     });
 
-    // Move o botão "Não" logo após carregar a página
+    // Primeiro movimento após carregar a página
     window.addEventListener('load', () => {
-      setTimeout(moveNoButton, 600);
+      setTimeout(moveNoButton, 800);
+    });
+
+    // Recalcula posição se a janela for redimensionada
+    window.addEventListener('resize', () => {
+      moveNoButton();
     });
 
     yesBtn.addEventListener('click', () => {
-      question.innerHTML = `EU SABIA QUE VOCÊ DIRIA SIM!!!<br><br>❤️ Agora somos casados!`;
+      question.innerHTML = `EU SABIA QUE VOCÊ DIRIA SIM!!! ❤️ <br><br>Agora somos casados!`;
       yesBtn.style.display = 'none';
       noBtn.style.display = 'none';
       gif.src = "https://media.tenor.com/7o7z7Z7Z7Z0AAAAj/kiss-love.gif";
       
       createHearts();
-      alert("🎉 Parabéns! Você fez a pessoa mais feliz do mundo! 💍");
+      alert("🎉 Parabéns! Você me fez a pessoa mais feliz do mundo! 💍");
     });
 
     function createHearts() {
