@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Você aceita casar comigo? 💍</title>
+  <title>Você aceita se casar comigo? 💍</title>
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap');
     
@@ -23,6 +23,9 @@
     .container {
       text-align: center;
       z-index: 10;
+      position: relative;
+      width: 100%;
+      max-width: 800px;
     }
 
     h1 {
@@ -42,34 +45,35 @@
     .buttons {
       margin-top: 40px;
       position: relative;
-      height: 80px;           /* espaço reservado para os botões */
+      min-height: 120px;   /* espaço reservado para o botão fugir */
     }
 
     button {
-      padding: 18px 40px;
-      font-size: 1.5rem;
+      padding: 18px 45px;
+      font-size: 1.6rem;
       border: none;
       border-radius: 50px;
       cursor: pointer;
-      transition: all 0.2s;
+      transition: all 0.3s;
       white-space: nowrap;
-      position: absolute;
     }
 
     #yesBtn {
       background: #4ade80;
       color: white;
-      left: 50%;
-      transform: translateX(-50%);
+      position: relative;
+      z-index: 2;
     }
 
     #noBtn {
       background: #f87171;
       color: white;
+      position: absolute;
+      z-index: 1;
     }
 
     #yesBtn:hover {
-      transform: translateX(-50%) scale(1.08);
+      transform: scale(1.08);
     }
   </style>
 </head>
@@ -77,11 +81,11 @@
   <div class="hearts" id="hearts"></div>
   
   <div class="container">
-    <h1 id="question">Você aceita casar comigo? 💍</h1>
+    <h1 id="question">Você aceita se casar comigo? 💍</h1>
     <img id="gif" class="gif" src="https://media.tenor.com/EBV7OT7ACfwAAAAj/u-u-qua-qua-u-quaa.gif" alt="fofinho">
     
     <div class="buttons">
-      <button id="yesBtn">SIM 💖</button>
+      <button id="yesBtn">SIM</button>
       <button id="noBtn">NÃO</button>
     </div>
   </div>
@@ -112,13 +116,16 @@
     const gif = document.getElementById('gif');
     const question = document.getElementById('question');
 
-    // Função para mover o botão "Não" para posição aleatória
     function moveNoButton() {
-      const maxX = window.innerWidth - 200;
-      const maxY = window.innerHeight - 300;
+      const container = document.querySelector('.buttons');
+      const containerRect = container.getBoundingClientRect();
+
+      // Gera posição aleatória dentro da área segura
+      const maxX = containerRect.width - 180;
+      const maxY = containerRect.height - 80;
 
       const randomX = Math.random() * maxX;
-      const randomY = Math.random() * maxY + 100; // evita ficar muito em cima
+      const randomY = Math.random() * maxY;
 
       noBtn.style.left = randomX + 'px';
       noBtn.style.top = randomY + 'px';
@@ -127,17 +134,16 @@
     noBtn.addEventListener('click', () => {
       noBtn.textContent = noMessages[noCount % noMessages.length];
       noCount++;
-      
-      moveNoButton();        // move o botão "Não"
+      moveNoButton();
     });
 
-    // Move o botão "Não" logo no começo também
+    // Move o botão "Não" logo após carregar a página
     window.addEventListener('load', () => {
-      setTimeout(moveNoButton, 800);
+      setTimeout(moveNoButton, 600);
     });
 
     yesBtn.addEventListener('click', () => {
-      question.innerHTML = `EU SABIA QUE VOCÊ DIRIA SIM!!!<br><br>💍❤️ Agora somos noivos(as)!`;
+      question.innerHTML = `EU SABIA QUE VOCÊ DIRIA SIM!!!<br><br>❤️ Agora somos casados!`;
       yesBtn.style.display = 'none';
       noBtn.style.display = 'none';
       gif.src = "https://media.tenor.com/7o7z7Z7Z7Z0AAAAj/kiss-love.gif";
