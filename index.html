@@ -6,6 +6,7 @@
   <title>Você aceita se casar comigo? 💍</title>
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap');
+    
     body {
       margin: 0;
       padding: 0;
@@ -18,49 +19,62 @@
       overflow: hidden;
       color: #333;
     }
+
     .container {
       text-align: center;
       z-index: 10;
     }
+
     h1 {
-      font-size: 3.5rem;
+      font-size: 2.9rem;
       color: #fff;
-      text-shadow: 0 0 20px rgba(0,0,0,0.2);
+      text-shadow: 0 0 20px rgba(0,0,0,0.25);
       margin-bottom: 20px;
     }
+
     .gif {
-      width: 220px;
-      height: 220px;
+      width: 200px;
+      height: 200px;
       margin: 20px auto;
       border-radius: 20px;
     }
+
     .buttons {
       margin-top: 30px;
+      display: flex;
+      justify-content: center;
+      gap: 25px;
+      flex-wrap: wrap;
     }
+
     button {
       padding: 18px 40px;
       font-size: 1.5rem;
-      margin: 0 15px;
       border: none;
       border-radius: 50px;
       cursor: pointer;
       transition: all 0.3s;
+      white-space: nowrap;
     }
+
     #yesBtn {
       background: #4ade80;
       color: white;
     }
+
     #noBtn {
       background: #f87171;
       color: white;
     }
-    #yesBtn:hover { transform: scale(1.1); }
+
+    #yesBtn:hover { 
+      transform: scale(1.08); 
+    }
+
     .hearts {
       position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
       pointer-events: none;
       z-index: 1;
     }
@@ -74,7 +88,7 @@
     <img id="gif" class="gif" src="https://media.tenor.com/EBV7OT7ACfwAAAAj/u-u-qua-qua-u-quaa.gif" alt="fofinho">
     
     <div class="buttons">
-      <button id="yesBtn">SIM</button>
+      <button id="yesBtn">SIM 💖</button>
       <button id="noBtn">NÃO</button>
     </div>
   </div>
@@ -88,18 +102,18 @@
       "Não faz isso comigo... 🥹",
       "Me dá uma chance 🥺",
       "Você é o amor da minha vida... ❤️",
-      "Eu te amo demais pra aceitar não.",
+      "Eu te amo demais pra aceitar não 😘",
       "Eu sou maluco por você, carioca ❤️",
       "Eu não quero viver sem você 😭",
       "CASA COMIGO! 💍",
       "Diz SIM! 🥹",
       "Eu já planejei nossa vida inteira... 😭",
       "Você me completa... não tira isso de mim ❤️",
-      "Meu coração vai quebrar... 💔"
+      "Meu coração vai quebrar... 💔",
       "Clica no sim se você não quer casar comigo."
     ];
+
     let noCount = 0;
-    let yesCount = 0;
 
     const yesBtn = document.getElementById('yesBtn');
     const noBtn = document.getElementById('noBtn');
@@ -109,25 +123,30 @@
     noBtn.addEventListener('click', () => {
       noBtn.textContent = noMessages[noCount % noMessages.length];
       noCount++;
-      yesSize += 0.2;
-      yesBtn.style.transform = `scale(${yesSize})`;
-      
-      // Troca GIF pra versão triste
-      if (noCount % 3 === 0) {
-        gif.src = "https://media3.giphy.com/media/v1.Y2lkPTc5MGI3NjExcWZ6YXVncHlyc2hsMWNpNGpuajlyam02enRvd2pzbzRpdmdpYnVheSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/P53TSsopKicrm/giphy.gif";
-        setTimeout(() => gif.src = "https://media.tenor.com/EBV7OT7ACfwAAAAj/u-u-qua-qua-u-quaa.gif", 1200);
+
+      // Troca ocasional para GIF triste
+      if (noCount % 4 === 0) {
+        gif.src = "https://media.tenor.com/4z0z2Z2Z2Z0AAAAj/sad-cry.gif";
+        setTimeout(() => {
+          gif.src = "https://media.tenor.com/EBV7OT7ACfwAAAAj/u-u-qua-qua-u-quaa.gif";
+        }, 1400);
       }
     });
 
     yesBtn.addEventListener('click', () => {
-      question.innerHTML = `EU SABIA QUE VOCÊ DIRIA SIM!!! ❤️<br><br> Agora estamos casados!`;
+      question.innerHTML = `EU SABIA QUE VOCÊ DIRIA SIM!!! ❤️<br><br>Agora estamos casados! 💍`;
+      
+      // GIF bonito ao clicar no SIM (casal se beijando / comemoração)
+      gif.src = "https://c.tenor.com/H5gUpayZJ6AAAAAd/tenor.gif";
+      
       yesBtn.style.display = 'none';
       noBtn.style.display = 'none';
-      gif.src = "https://itunes.apple.com/app/apple-store/id917932200?pt=39040802&ct=Media1GIFV2&mt=8";
-      
-      // Confetes + corações
+
       createHearts();
-      alert("🎉 Parabéns! Você acabou de me fazer a pessoa mais feliz do mundo! 💍");
+      
+      setTimeout(() => {
+        alert("🎉 Parabéns! Você me fez a pessoa mais feliz do mundo! 💍");
+      }, 600);
     });
 
     function createHearts() {
@@ -140,12 +159,10 @@
         heart.style.fontSize = Math.random() * 30 + 20 + 'px';
         heart.style.animation = `fall ${Math.random()*5 + 5}s linear forwards`;
         heartsContainer.appendChild(heart);
-        
         setTimeout(() => heart.remove(), 10000);
       }
     }
 
-    // Animação CSS dos corações
     const style = document.createElement('style');
     style.innerHTML = `
       @keyframes fall {
