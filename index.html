@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Você aceita casar comigo? 💍</title>
+  <title>Você aceita se casar comigo? 💍</title>
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap');
     body {
@@ -70,11 +70,11 @@
   <div class="hearts" id="hearts"></div>
   
   <div class="container">
-    <h1 id="question">Você aceita casar comigo? 💍</h1>
+    <h1 id="question">Você aceita se casar comigo? 💍</h1>
     <img id="gif" class="gif" src="https://media.tenor.com/EBV7OT7ACfwAAAAj/u-u-qua-qua-u-quaa.gif" alt="fofinho">
     
     <div class="buttons">
-      <button id="yesBtn">SIM 💖</button>
+      <button id="yesBtn">SIM</button>
       <button id="noBtn">NÃO</button>
     </div>
   </div>
@@ -86,12 +86,19 @@
       "Eu vou ficar muito triste... 😭",
       "Por favor, amor... 💔",
       "Não faz isso comigo... 🥹",
-      "Só mais uma chance? 🥰",
+      "Me dá uma chance 🥺",
       "Você é o amor da minha vida... ❤️",
-      "Eu te amo demais pra aceitar não 😘"
+      "Eu te amo demais pra aceitar não 😘",
+      "Eu sou maluco por você, carioca ❤️",
+      "Eu não quero viver sem você 😭",
+      "CASA COMIGO! 💍",
+      "Diz SIM! 🥹",
+      "Eu já planejei nossa vida inteira... 😭",
+      "Você me completa... não tira isso de mim ❤️",
+      "Meu coração vai quebrar... 💔"
     ];
     let noCount = 0;
-    let yesSize = 1;
+    let yesCount = 0;
 
     const yesBtn = document.getElementById('yesBtn');
     const noBtn = document.getElementById('noBtn');
@@ -112,14 +119,14 @@
     });
 
     yesBtn.addEventListener('click', () => {
-      question.innerHTML = `EU SABIA QUE VOCÊ DIRIA SIM!!!<br><br>💍❤️ Agora somos noivos(as)!`;
+      question.innerHTML = `EU SABIA QUE VOCÊ DIRIA SIM!!! ❤️<br><br> Agora estamos casados!`;
       yesBtn.style.display = 'none';
       noBtn.style.display = 'none';
       gif.src = "https://media.tenor.com/7o7z7Z7Z7Z0AAAAj/kiss-love.gif";
       
       // Confetes + corações
       createHearts();
-      alert("🎉 Parabéns! Você acabou de fazer a pessoa mais feliz do mundo! 💍");
+      alert("🎉 Parabéns! Você acabou de me fazer a pessoa mais feliz do mundo! 💍");
     });
 
     function createHearts() {
