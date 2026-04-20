@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Você aceita casar comigo?</title>
+  <title>Você aceita casar comigo? 💍</title>
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap');
     
@@ -26,9 +26,9 @@
     }
 
     h1 {
-      font-size: 3.5rem;
+      font-size: 3.2rem;
       color: #fff;
-      text-shadow: 0 0 20px rgba(0,0,0,0.2);
+      text-shadow: 0 0 20px rgba(0,0,0,0.3);
       margin-bottom: 20px;
     }
 
@@ -44,7 +44,7 @@
       display: flex;
       justify-content: center;
       align-items: center;
-      gap: 20px;           /* espaço fixo entre os botões */
+      gap: 25px;
       flex-wrap: wrap;
     }
 
@@ -55,13 +55,12 @@
       border-radius: 50px;
       cursor: pointer;
       transition: all 0.3s;
-      white-space: nowrap;   /* evita quebra de linha */
+      white-space: nowrap;
     }
 
     #yesBtn {
       background: #4ade80;
       color: white;
-      transform-origin: center;   /* faz o crescimento centralizado */
     }
 
     #noBtn {
@@ -71,7 +70,6 @@
 
     #yesBtn:hover { transform: scale(1.1); }
 
-    /* Container fixo para o botão Sim (evita movimento) */
     .yes-container {
       display: inline-block;
       transition: transform 0.3s;
@@ -79,10 +77,8 @@
 
     .hearts {
       position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
       pointer-events: none;
       z-index: 1;
     }
@@ -92,11 +88,10 @@
   <div class="hearts" id="hearts"></div>
   
   <div class="container">
-    <h1 id="question">Você aceita se casar comigo?</h1>
+    <h1 id="question">Você aceita casar comigo? 💍</h1>
     <img id="gif" class="gif" src="https://media.tenor.com/EBV7OT7ACfwAAAAj/u-u-qua-qua-u-quaa.gif" alt="fofinho">
     
     <div class="buttons">
-      <!-- Botão Sim agora está dentro de um container fixo -->
       <div class="yes-container" id="yesContainer">
         <button id="yesBtn">SIM 💖</button>
       </div>
@@ -111,16 +106,16 @@
       "Eu vou ficar muito triste... 😭",
       "Por favor, amor... 💔",
       "Não faz isso comigo... 🥹",
-      "Me da uma chance",
+      "Me dá uma chance 🥺",
       "Você é o amor da minha vida... ❤️",
-      "Eu te amo demais pra aceitar não."
-      "Eu sou maluco por você, carioca."
-      "Eu não quero viver sem você."
-      "CASA COMIGO!"
-      "Diz SIM!"
-      "Eu já planejei nossa vida inteira. 😭",
-      "Você me completa... não tira isso de mim ❤️"
-      "Meu coração vai quebrar... 💔",
+      "Eu te amo demais pra aceitar não 😘",
+      "Eu sou maluco por você, carioca ❤️",
+      "Eu não quero viver sem você 😭",
+      "CASA COMIGO! 💍",
+      "Diz SIM! 🥹",
+      "Eu já planejei nossa vida inteira... 😭",
+      "Você me completa... não tira isso de mim ❤️",
+      "Meu coração vai quebrar... 💔"
     ];
 
     let noCount = 0;
@@ -135,20 +130,18 @@
     noBtn.addEventListener('click', () => {
       noBtn.textContent = noMessages[noCount % noMessages.length];
       noCount++;
-
-      // Aumenta o tamanho do Sim sem mexer no layout
       yesScale += 0.15;
       yesContainer.style.transform = `scale(${yesScale})`;
     });
 
     yesBtn.addEventListener('click', () => {
-      question.innerHTML = `EU SABIA QUE VOCÊ DIRIA SIM!!!<br><br>❤️ Agora somos casados!`;
+      question.innerHTML = `EU SABIA QUE VOCÊ DIRIA SIM!!!<br><br>💍❤️ Agora somos noivos(as)!`;
       yesBtn.style.display = 'none';
       noBtn.style.display = 'none';
       gif.src = "https://media.tenor.com/7o7z7Z7Z7Z0AAAAj/kiss-love.gif";
       
       createHearts();
-      alert("🎉 Parabéns! Você me fez a pessoa mais feliz do mundo! 💍");
+      alert("🎉 Parabéns! Você fez a pessoa mais feliz do mundo! 💍");
     });
 
     function createHearts() {
@@ -166,11 +159,7 @@
     }
 
     const style = document.createElement('style');
-    style.innerHTML = `
-      @keyframes fall {
-        to { transform: translateY(100vh) rotate(720deg); opacity: 0; }
-      }
-    `;
+    style.innerHTML = `@keyframes fall { to { transform: translateY(100vh) rotate(720deg); opacity: 0; } }`;
     document.head.appendChild(style);
   </script>
 </body>
