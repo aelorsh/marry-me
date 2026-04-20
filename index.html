@@ -25,33 +25,38 @@
       z-index: 10;
       position: relative;
       width: 90%;
-      max-width: 800px;
+      max-width: 480px;
     }
 
     h1 {
-      font-size: 3.2rem;
+      font-size: 2.4rem;
       color: #fff;
-      text-shadow: 0 0 20px rgba(0,0,0,0.3);
-      margin-bottom: 30px;
+      text-shadow: 0 0 15px rgba(0,0,0,0.25);
+      margin: 0 0 12px 0;
+      line-height: 1.1;
+    }
+
+    .ring {
+      font-size: 2.5rem;
+      margin: 8px 0 18px 0;
     }
 
     .gif {
-      width: 220px;
-      height: 220px;
-      margin: 20px auto;
+      width: 160px;
+      height: 160px;
+      margin: 10px auto 20px;
       border-radius: 20px;
     }
 
     .buttons {
-      margin-top: 40px;
+      margin-top: 15px;
       position: relative;
-      min-height: 220px;
-      width: 100%;
+      min-height: 130px;
     }
 
     button {
-      padding: 18px 45px;
-      font-size: 1.6rem;
+      padding: 15px 38px;
+      font-size: 1.4rem;
       border: none;
       border-radius: 50px;
       cursor: pointer;
@@ -64,7 +69,7 @@
       color: white;
       position: relative;
       z-index: 2;
-      margin: 0 auto;
+      margin: 0 auto 12px;
       display: block;
     }
 
@@ -78,14 +83,26 @@
     #yesBtn:hover {
       transform: scale(1.08);
     }
+
+    /* Tela final - menor e mais segura */
+    #finalText {
+      font-size: 2.1rem;
+      color: #fff;
+      text-shadow: 0 0 15px rgba(0,0,0,0.3);
+      margin: 20px 0 10px 0;
+    }
   </style>
 </head>
 <body>
   <div class="hearts" id="hearts"></div>
   
   <div class="container">
-    <h1 id="question">Você aceita se casar comigo? 💍</h1>
-    <img id="gif" class="gif" src="https://media.tenor.com/EBV7OT7ACfwAAAAj/u-u-qua-qua-u-quaa.gif" alt="fofinho">
+    <h1 id="question">Você aceita se casar comigo?</h1>
+    <div class="ring">💍</div>
+    
+    <img id="gif" class="gif" 
+         src="https://media.tenor.com/EBV7OT7ACfwAAAAj/u-u-qua-qua-u-quaa.gif" 
+         alt="fofinho">
     
     <div class="buttons">
       <button id="yesBtn">SIM 💖</button>
@@ -123,11 +140,10 @@
       const btnWidth = noBtn.offsetWidth || 140;
       const btnHeight = noBtn.offsetHeight || 60;
 
-      // Margens de segurança para não sair da tela
-      const minX = 30;
-      const maxX = window.innerWidth - btnWidth - 30;
-      const minY = 180;   // evita ficar muito em cima (debaixo do título e gif)
-      const maxY = window.innerHeight - btnHeight - 100;
+      const minX = 20;
+      const maxX = window.innerWidth - btnWidth - 40;
+      const minY = 280;
+      const maxY = window.innerHeight - btnHeight - 90;
 
       const randomX = Math.max(minX, Math.random() * (maxX - minX));
       const randomY = Math.max(minY, Math.random() * (maxY - minY));
@@ -142,37 +158,38 @@
       moveNoButton();
     });
 
-    // Primeiro movimento após carregar a página
     window.addEventListener('load', () => {
-      setTimeout(moveNoButton, 800);
+      setTimeout(moveNoButton, 600);
     });
 
-    // Recalcula posição se a janela for redimensionada
-    window.addEventListener('resize', () => {
-      moveNoButton();
-    });
+    window.addEventListener('resize', moveNoButton);
 
     yesBtn.addEventListener('click', () => {
-      question.innerHTML = `EU SABIA QUE VOCÊ DIRIA SIM!!! ❤️ <br><br>Agora somos casados!`;
+      question.innerHTML = `
+        <span id="finalText">SIM!!! ❤️</span><br><br>
+        Agora somos noivos(as)!
+      `;
       yesBtn.style.display = 'none';
       noBtn.style.display = 'none';
       gif.src = "https://media.tenor.com/7o7z7Z7Z7Z0AAAAj/kiss-love.gif";
       
       createHearts();
-      alert("🎉 Parabéns! Você me fez a pessoa mais feliz do mundo! 💍");
+      setTimeout(() => {
+        alert("🎉 Parabéns! Você fez a pessoa mais feliz do mundo! 💍");
+      }, 800);
     });
 
     function createHearts() {
       const heartsContainer = document.getElementById('hearts');
-      for (let i = 0; i < 150; i++) {
+      for (let i = 0; i < 100; i++) {
         const heart = document.createElement('div');
         heart.textContent = ['💖', '💍', '❤️', '💘'][Math.floor(Math.random()*4)];
         heart.style.position = 'absolute';
         heart.style.left = Math.random() * 100 + 'vw';
-        heart.style.fontSize = Math.random() * 30 + 20 + 'px';
+        heart.style.fontSize = Math.random() * 26 + 18 + 'px';
         heart.style.animation = `fall ${Math.random()*5 + 5}s linear forwards`;
         heartsContainer.appendChild(heart);
-        setTimeout(() => heart.remove(), 10000);
+        setTimeout(() => heart.remove(), 9000);
       }
     }
 
